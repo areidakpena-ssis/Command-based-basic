@@ -50,8 +50,14 @@ public class RobotContainer {
     m_robotDrive.setDefaultCommand(
       Commands.run( () -> m_robotDrive.arcadeDrive(-m_driverController.getLeftY(),
                                                  -m_driverController.getRightX()),
-                                                 m_robotDrive));
-
+                      m_robotDrive));
+    /*                          
+    RunCommand(() -> m_robotDrive.arcadeDrive(
+        -m_driverController.getLeftY(),
+        -m_driverController.getRightX()), 
+        m_robotDrive);
+    */
+      
     // Add commands to the autonomous command chooser
     m_chooser.setDefaultOption("Simple Auto", m_simpleAuto);
   }
