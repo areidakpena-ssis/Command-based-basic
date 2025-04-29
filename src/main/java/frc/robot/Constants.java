@@ -28,6 +28,13 @@ public final class Constants {
     public static final int[] kRightEncoderPorts = new int[] {2, 3};
     public static final boolean kLeftEncoderReversed = true;
     public static final boolean kRightEncoderReversed = false;
+
+    // add in gear ratio
+    public static final int kEncoderCPR = 1024;
+    public static final double kWheelDiameterInches = 6;
+    public static final double kEncoderDistancePerPulse =
+        // Assumes the encoders are directly mounted on the wheel shafts
+        (kWheelDiameterInches * Math.PI) / kEncoderCPR;
   }
 
 
