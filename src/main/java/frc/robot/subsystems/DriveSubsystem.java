@@ -71,6 +71,14 @@ public class DriveSubsystem extends SubsystemBase {
     m_drive.arcadeDrive(fwd, rot);
   }
 
+  /**
+   * Drive the robot using tank drive controls
+   * 
+   */
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    m_drive.tankDrive(leftSpeed, rightSpeed);
+  }
+
   /** Resets the drive encoders to currently read a position of 0 */
   public void resetEncoders() {
     m_leftEncoder.reset();

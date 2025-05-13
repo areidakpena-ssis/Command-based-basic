@@ -41,6 +41,10 @@ public class RobotContainer {
   private final SlewRateLimiter m_speedLimiter = new SlewRateLimiter(3);
   private final SlewRateLimiter m_rotRateLimiter = new SlewRateLimiter(3);
 
+  enum DriveMode { 
+    ARCADE,
+    TANK
+  }
   // a chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -51,11 +55,19 @@ public class RobotContainer {
 
     // configure default commands
     // set default drive to split-stick arcade drive
+    /*
     m_robotDrive.setDefaultCommand(
       Commands.run( () -> m_robotDrive.arcadeDrive(
                                   -m_speedLimiter.calculate(m_driverController.getLeftY()),
                                   -m_rotRateLimiter.calculate(m_driverController.getRightX())),
                       m_robotDrive));
+    */
+
+    m_robotDrive.setDefaultCommand(
+      Commands.run( () -> m_robotDrive.tankDrive(
+        -m_speedLimiter.calculate(m_driverController.getLeftY()),
+        -m_speedLimiter.calculate(m_driverController.getRightY())),
+        m_robotDrive));    
     /*                          
     RunCommand(() -> m_robotDrive.arcadeDrive(
         -m_driverController.getLeftY(),
