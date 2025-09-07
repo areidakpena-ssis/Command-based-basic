@@ -123,6 +123,13 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveMode getSelectedDriveMode() {
     return m_selectedDriveMode;
   }
+ 
+  /**
+   * Switch the selected drive mode.
+   */
+  public void switchSelectedDriveMode() {
+    m_selectedDriveMode = (m_selectedDriveMode == DriveMode.TANK) ? DriveMode.SPLIT_ARCADE : DriveMode.TANK;
+  }
 
   /*
     alter some comments
