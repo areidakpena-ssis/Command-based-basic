@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
+
 import frc.robot.Constants.DriveConstants; // our constants
 import frc.robot.Constants.DriveMode;
 
@@ -36,6 +38,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_VictorSPX m_leftFollower = new WPI_VictorSPX(DriveConstants.kLeftMotor2Port);
   private final WPI_TalonSRX m_rightLeader = new WPI_TalonSRX(DriveConstants.kRightMotor1Port);
   private final WPI_VictorSPX m_rightFollower = new WPI_VictorSPX(DriveConstants.kRightMotor2Port);
+
+  private final PigeonIMU m_pidgey = new PigeonIMU(m_leftLeader);
+
 
   private final DifferentialDrive m_drive =
     new DifferentialDrive(m_leftLeader::set, m_rightLeader::set);
@@ -129,6 +134,13 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void switchSelectedDriveMode() {
     m_selectedDriveMode = (m_selectedDriveMode == DriveMode.TANK) ? DriveMode.SPLIT_ARCADE : DriveMode.TANK;
+  }
+
+  /** Get Yaw from Pigeon IMU
+   * 
+   */
+  public double getYaw() {
+    return m_pidgey.getYaw();
   }
 
   /*

@@ -11,6 +11,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.DefaultDrive;
 //import frc.robot.commands.Autos;
 import frc.robot.commands.DriveDistance;
+import frc.robot.commands.TurnByAngle;
 //import frc.robot.commands.SwitchDriveMode;
 //import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
@@ -112,6 +113,14 @@ public class RobotContainer {
     // or with inline command:
     new JoystickButton(m_driverController, Button.kTriangle.value).onTrue(
       Commands.run( () -> m_robotDrive.switchSelectedDriveMode() )
+    );
+
+    new JoystickButton(m_driverController, Button.kL1.value).onTrue(
+      new TurnByAngle(90, m_robotDrive)
+    );
+
+    new JoystickButton(m_driverController, Button.kR1.value).onTrue(
+      new TurnByAngle(-90, m_robotDrive)
     );
 
     /* 
