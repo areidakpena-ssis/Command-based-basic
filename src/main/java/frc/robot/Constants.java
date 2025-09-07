@@ -17,6 +17,13 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
 
+  // in this program we can select from two drive modes,
+  // using standard left-and-right joystick controls for each
+  public enum DriveMode {
+    TANK, 
+    SPLIT_ARCADE
+  }
+
 
   public static final class DriveConstants {
     public static final int kLeftMotor1Port = 10;
@@ -45,3 +52,5 @@ public final class Constants {
   }
 
 }
+
+

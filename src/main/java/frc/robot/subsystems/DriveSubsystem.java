@@ -18,6 +18,16 @@ import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 import frc.robot.Constants.DriveConstants; // our constants
+import frc.robot.Constants.DriveMode;
+
+// in this program we can select from two drive modes,
+// using standard left-and-right joystick controls for each
+/** 
+enum DriveMode {
+  TANK, 
+  SPLIT_ARCADE
+}
+  */
 
 public class DriveSubsystem extends SubsystemBase {
 
@@ -30,6 +40,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final DifferentialDrive m_drive =
     new DifferentialDrive(m_leftLeader::set, m_rightLeader::set);
     // might need to invert motor before passing
+
+
+  private DriveMode m_selectedDriveMode = DriveMode.TANK; // default drive control mode
 
   // left side drive encoder
   private final Encoder m_leftEncoder = 
@@ -104,6 +117,12 @@ public class DriveSubsystem extends SubsystemBase {
     m_drive.setMaxOutput(maxOutput);
   }
 
+  /**
+   * Make selected drive mode accessible to outside
+   */
+  public DriveMode getSelectedDriveMode() {
+    return m_selectedDriveMode;
+  }
 
   /*
     alter some comments
