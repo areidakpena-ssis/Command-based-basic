@@ -11,7 +11,7 @@ import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import edu.wpi.first.wpilibj.simulation.EncoderSim;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -146,13 +146,13 @@ public class DriveSubsystem extends SubsystemBase {
     m_pidgey.setYaw(val);
   }
 
-  /*
-    alter some comments
     @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Yaw", m_pidgey.getYaw());
   }
 
+  /*
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
