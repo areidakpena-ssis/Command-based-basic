@@ -52,10 +52,13 @@ public class DefaultDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // the following article explains the sign conventions used for joystick and 
+    // robot rotation, and why minus signs are required
+    // link: https://docs.wpilib.org/en/latest/docs/software/basic-programming/coordinate-system.html  
     if (m_driveSubsystem.getSelectedDriveMode() == DriveMode.TANK) {
-        m_driveSubsystem.tankDrive(m_leftY.getAsDouble(), m_rightY.getAsDouble());
+        m_driveSubsystem.tankDrive(-m_leftY.getAsDouble(), -m_rightY.getAsDouble());
     } else {
-        m_driveSubsystem.arcadeDrive(m_leftY.getAsDouble(), m_rightX.getAsDouble());
+        m_driveSubsystem.arcadeDrive(-m_leftY.getAsDouble(), -m_rightX.getAsDouble());
     }
   }
  
