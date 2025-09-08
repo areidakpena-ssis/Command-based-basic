@@ -37,9 +37,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_TalonSRX m_leftLeader = new WPI_TalonSRX(DriveConstants.kLeftMotor1Port);
   private final WPI_VictorSPX m_leftFollower = new WPI_VictorSPX(DriveConstants.kLeftMotor2Port);
   private final WPI_TalonSRX m_rightLeader = new WPI_TalonSRX(DriveConstants.kRightMotor1Port);
-  private final WPI_VictorSPX m_rightFollower = new WPI_VictorSPX(DriveConstants.kRightMotor2Port);
+  private final WPI_TalonSRX m_rightFollower = new WPI_TalonSRX(DriveConstants.kRightMotor2Port);
 
-  private final PigeonIMU m_pidgey = new PigeonIMU(m_leftLeader);
+  private final PigeonIMU m_pidgey = new PigeonIMU(m_rightFollower);
 
 
   private final DifferentialDrive m_drive =
