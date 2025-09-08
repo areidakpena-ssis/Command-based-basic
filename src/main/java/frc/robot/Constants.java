@@ -42,6 +42,9 @@ public final class Constants {
     public static final double kEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
         (kWheelDiameterInches * Math.PI) / kEncoderCPR;
+
+    // slew rate limit
+    public static final int kRateLimit = 3;
   }
 
 

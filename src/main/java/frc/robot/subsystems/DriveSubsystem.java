@@ -34,8 +34,8 @@ public class DriveSubsystem extends SubsystemBase {
   private final PigeonIMU m_pidgey = new PigeonIMU(m_rightFollower);
 
   // slew rate limiters to limit acceleration
-  private final SlewRateLimiter m_speedLimiter = new SlewRateLimiter(3);
-  private final SlewRateLimiter m_rotRateLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter m_speedLimiter = new SlewRateLimiter(DriveConstants.kRateLimit);
+  private final SlewRateLimiter m_rotRateLimiter = new SlewRateLimiter(DriveConstants.kRateLimit);
 
   private final DifferentialDrive m_drive =
     new DifferentialDrive(m_leftLeader::set, m_rightLeader::set);

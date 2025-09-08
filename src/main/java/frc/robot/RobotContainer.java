@@ -16,14 +16,13 @@ import frc.robot.commands.TurnByAngle;
 //import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
-//import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.PS4Controller;
 //import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands; // static factory methods for commands
 //import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -69,20 +68,6 @@ public class RobotContainer {
         () -> -m_driverController.getRightX())
     );
     
-    /* 
-    m_robotDrive.setDefaultCommand(
-      Commands.run( () -> m_robotDrive.tankDrive(
-        -m_speedLimiter.calculate(m_driverController.getLeftY()),
-        -m_speedLimiter.calculate(m_driverController.getRightY())),
-        m_robotDrive));    
-     */
-    /* 
-    RunCommand(() -> m_robotDrive.arcadeDrive(
-        -m_driverController.getLeftY(),
-        m_driverController.getRightX()), 
-        m_robotDrive);
-    */
-      
     // Add commands to the autonomous command chooser
     m_chooser.setDefaultOption("Simple Auto", m_simpleAuto);
   }
@@ -100,8 +85,6 @@ public class RobotContainer {
   private void configureBindings() {
     // switch drive modes when triangle button pressed
     //new JoystickButton(m_driverController, Button.kTriangle.value).onTrue(new SwitchDriveMode(m_robotDrive));
-
-
     // or with inline command:
     new JoystickButton(m_driverController, Button.kTriangle.value).onTrue(
       Commands.run( () -> m_robotDrive.switchSelectedDriveMode() )
