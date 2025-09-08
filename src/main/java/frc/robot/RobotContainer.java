@@ -15,6 +15,7 @@ import frc.robot.commands.TurnByAngle;
 //import frc.robot.commands.SwitchDriveMode;
 //import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
+
 //import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.PS4Controller;
 //import edu.wpi.first.wpilibj.Timer;
@@ -58,15 +59,6 @@ public class RobotContainer {
 
     // configure default commands
     // set default drive to split-stick arcade drive
-    
-    /** 
-    m_robotDrive.setDefaultCommand(
-      Commands.run( () -> m_robotDrive.arcadeDrive(
-                                  -m_speedLimiter.calculate(m_driverController.getLeftY()),
-                                  m_rotRateLimiter.calculate(m_driverController.getRightX())),
-                      m_robotDrive));
-    */
-  
     m_robotDrive.setDefaultCommand(
       // DefaultDrive uses either tank drive with left and right Y joysticks,
       // or split-stick arcade with left Y and right X.

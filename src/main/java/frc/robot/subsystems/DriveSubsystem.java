@@ -4,32 +4,24 @@
 
 package frc.robot.subsystems;
 
-//import org.ejml.dense.row.decomposition.eig.watched.WatchedDoubleStepQREigenvalue_DDRM;
-
 //import edu.wpi.first.util.sendable.SendableBuilder;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.util.sendable.SendableRegistry;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import edu.wpi.first.wpilibj.simulation.EncoderSim;
+
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
-
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.robot.Constants.DriveConstants; // our constants
 import frc.robot.Constants.DriveMode;
 
-// in this program we can select from two drive modes,
-// using standard left-and-right joystick controls for each
-/** 
-enum DriveMode {
-  TANK, 
-  SPLIT_ARCADE
-}
-  */
 
 public class DriveSubsystem extends SubsystemBase {
 
@@ -41,6 +33,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   private final PigeonIMU m_pidgey = new PigeonIMU(m_rightFollower);
 
+  // slew rate limiters to limit acceleration
+  private final SlewRateLimiter m_speedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter m_rotRateLimiter = new SlewRateLimiter(3);
 
   private final DifferentialDrive m_drive =
     new DifferentialDrive(m_leftLeader::set, m_rightLeader::set);
@@ -80,7 +75,6 @@ public class DriveSubsystem extends SubsystemBase {
     m_pidgey.setYaw(0.0); // set yaw to 0 at start
   }
 
-
   /**
    * Drive the robot using arcade controls
    * 
@@ -88,7 +82,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @param rot the commanded rotation
    */
   public void arcadeDrive(double fwd, double rot) {
-    m_drive.arcadeDrive(fwd, rot);
+    m_drive.arcadeDrive( m_speedLimiter.calculate(fwd), m_rotRateLimiter.calculate(rot));
   }
 
   /**
@@ -96,7 +90,7 @@ public class DriveSubsystem extends SubsystemBase {
    * 
    */
   public void tankDrive(double leftSpeed, double rightSpeed) {
-    m_drive.tankDrive(leftSpeed, rightSpeed);
+    m_drive.tankDrive( m_speedLimiter.calculate(leftSpeed), m_speedLimiter.calculate(rightSpeed));
   }
 
   /** Resets the drive encoders to currently read a position of 0 */
