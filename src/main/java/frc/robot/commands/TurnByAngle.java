@@ -25,7 +25,7 @@ public class TurnByAngle extends Command {
         m_turnAngle = turnAngle; // + CCW, - CW
         m_startAngle = m_DriveSubsystem.getYaw();
         m_endAngle = m_startAngle + m_turnAngle;
-        m_speed = 0.8;
+        m_speed = (turnAngle > 0) ? -0.5 : 0.5;
         addRequirements(m_DriveSubsystem);
     }
 
