@@ -76,6 +76,8 @@ public class DriveSubsystem extends SubsystemBase {
     m_rightFollower.follow(m_rightLeader);
     m_rightLeader.setInverted(false);
     m_rightFollower.setInverted(InvertType.FollowMaster);
+
+    m_pidgey.setYaw(0.0); // set yaw to 0 at start
   }
 
 
@@ -141,6 +143,13 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public double getYaw() {
     return m_pidgey.getYaw();
+  }
+
+  /**
+   * Set yaw of pigeon, in case it is needed by commands
+   */
+  public void setYaw(double val) {
+    m_pidgey.setYaw(val);
   }
 
   /*

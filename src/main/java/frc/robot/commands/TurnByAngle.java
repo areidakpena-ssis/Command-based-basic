@@ -6,9 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class TurnByAngle extends Command {
     private final DriveSubsystem m_DriveSubsystem;
-    private final double m_turnAngle;
-    private final double m_startAngle;
-    private final double m_endAngle;
+    private final double m_deltaYaw; // change in yaw; negative is ccw - opposite of robot coord system
     private final double m_speed;
 
 
@@ -22,9 +20,9 @@ public class TurnByAngle extends Command {
      */
     public TurnByAngle(double turnAngle, DriveSubsystem drive) {
         m_DriveSubsystem = drive;
-        m_turnAngle = turnAngle; // + CCW, - CW
-        m_startAngle = m_DriveSubsystem.getYaw();
-        m_endAngle = m_startAngle + m_turnAngle;
+        m_deltaYaw = -turnAngle; // yaw angle sign opposite to robot z-axis
+        // positive turn angle indicates ccw rotation
+        // positive speed indicates positive turning direction around z-axis
         m_speed = (turnAngle > 0) ? 0.5 : -0.5;
         addRequirements(m_DriveSubsystem);
     }
@@ -32,6 +30,7 @@ public class TurnByAngle extends Command {
 
   @Override
   public void initialize() {
+      m_DriveSubsystem.setYaw(0.0); //zero the yaw for consistency
   }
 
   @Override
@@ -47,16 +46,7 @@ public class TurnByAngle extends Command {
 
   @Override
   public boolean isFinished() {
-    if (m_turnAngle > 0) {
-        return m_DriveSubsystem.getYaw() >= m_endAngle;
-    }
-    else if (m_turnAngle < 0) {
-        return m_DriveSubsystem.getYaw() <= m_endAngle;
-    }
-    else {
-        return true; // no turning if angle is 0.
-    }
+    return Math.abs(m_DriveSubsystem.getYaw()) >= Math.abs(m_deltaYaw); // keep it simple
   }
-
 }
 
